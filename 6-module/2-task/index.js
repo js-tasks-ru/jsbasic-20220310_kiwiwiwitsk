@@ -1,10 +1,10 @@
 import createElement from '../../assets/lib/create-element.js';
 
 export default class ProductCard {
-  elem = null;
+  card = null;
   constructor(product) {
     this.product = product;
-    this.elem = createElement(`
+    this.card = createElement(`
       <div class="card">
         <div class="card__top">
           <img src="/assets/images/products/${this.product.image}" class="card__image" alt="product">
@@ -22,17 +22,17 @@ export default class ProductCard {
   }
 
   get elem() {
-    return this.elem;
+    return this.card;
   }
 
   productAdd() {
-    const button = this.elem.querySelector('.card__button');
+    const button = this.card.querySelector('.card__button');
     button.addEventListener('click', () => {
       const e = new CustomEvent("product-add", {
         detail: this.product.id,
         bubbles: true
       });
-      this.elem.dispatchEvent(e);
+      this.card.dispatchEvent(e);
     })
   }
 }

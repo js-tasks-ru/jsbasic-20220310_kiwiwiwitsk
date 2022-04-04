@@ -14,25 +14,25 @@
  */
 export default class UserTable {
   // Свойство elem
-  elem = null;
+  table = null;
 
   constructor(rows) {
     this.rows = rows;
     // elem присвоена ссылка на table
-    this.elem = document.createElement('table');
+    this.table = document.createElement('table');
     // Вызов функции, заполняищий table
     this.tableFiller();
   };
 
   // Геттер вернет ссылку на table
   get elem() {
-    return this.elem;
+    return this.table;
   };
 
   tableFiller() {
     // Создание элементов tHead и tBody внутри table
-    let tHead = this.elem.createTHead();
-    let tBody = this.elem.createTBody();
+    let tHead = this.table.createTHead();
+    let tBody = this.table.createTBody();
 
     // Заполнение tHead по заданному шаблону
     tHead.innerHTML = `
@@ -58,7 +58,7 @@ export default class UserTable {
     };
 
     // Собираем все кнопки в переменную button и циклом проходим по каждой
-    const buttons = this.elem.querySelectorAll('button');
+    const buttons = this.table.querySelectorAll('button');
 
     for (const button of buttons) {
       button.addEventListener('click', (e) => {
