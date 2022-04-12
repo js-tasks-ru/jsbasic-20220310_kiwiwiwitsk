@@ -4,7 +4,7 @@ export default class StepSlider {
   elem = null
 
   constructor({ steps, value = 0 }) {
-    this.steps = steps
+    this.steps = steps;
     this.elem = createElement(`
     <div class="slider">
       <div class="slider__thumb">
@@ -16,36 +16,36 @@ export default class StepSlider {
       </div>
     </div>
     `)
-    this.setEventListeners()
-    this.#makeStepActive(value)
+    this.setEventListeners();
+    this.setActiveStep(value);
   }
 
   setSteps() {
-    const arr = []
+    const arr = [];
     for (let i = 0; i < this.steps; i++) {
-      arr.push(i)
+      arr.push(i);
     }
-    return arr.map((item) => `<span></span>`)
+    return arr.map((item) => `<span></span>`);
   }
 
 
   setEventListeners() {
     this.elem.addEventListener('click', (event) => {
-      let left = event.clientX - this.elem.getBoundingClientRect().left
-      let leftRelative = left / this.elem.offsetWidth
-      let approximateValue = leftRelative * (this.steps - 1)
-      let value = Math.round(approximateValue)
-      this.#makeStepActive(value)
+      let left = event.clientX - this.elem.getBoundingClientRect().left;
+      let leftRelative = left / this.elem.offsetWidth;
+      let approximateValue = leftRelative * (this.steps - 1);
+      let value = Math.round(approximateValue);
+      this.setActiveStep(value);
     })
   }
 
-  #makeStepActive(value) {
+  setActiveStep(value) {
     const currentActiveStep = this.elem.querySelector('.slider__step-active');
-    currentActiveStep.classList.remove('slider__step-active')
+    currentActiveStep.classList.remove('slider__step-active');
 
-    this.elem.querySelector('.slider__value').textContent = value
-    const newActiveStep = this.elem.querySelectorAll('.slider__steps span')[value]
-    newActiveStep.classList.add('slider__step-active')
+    this.elem.querySelector('.slider__value').textContent = value;
+    const newActiveStep = this.elem.querySelectorAll('.slider__steps span')[value];
+    newActiveStep.classList.add('slider__step-active');
 
     let thumb = this.elem.querySelector('.slider__thumb');
     let progress = this.elem.querySelector('.slider__progress');
@@ -58,6 +58,6 @@ export default class StepSlider {
       detail: value,
       bubbles: true
     })
-    this.elem.dispatchEvent(event)
+    this.elem.dispatchEvent(event);
   }
 }
